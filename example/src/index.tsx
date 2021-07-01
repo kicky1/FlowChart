@@ -2,6 +2,7 @@ import React, { ChangeEvent } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
 
+import TestSevenet from './TestSevenet';
 import Overview from './Overview';
 import Basic from './Basic';
 import CustomNode from './CustomNode';
@@ -33,6 +34,10 @@ const routes = [
   {
     path: '/',
     component: Overview,
+  },
+  {
+    path: '/testsevenet',
+    component: TestSevenet,
   },
   {
     path: '/edges',
