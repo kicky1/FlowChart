@@ -1,4 +1,4 @@
-import React, { useEffect, useState, DragEvent, MouseEvent } from 'react';
+import React, { useEffect, useState, DragEvent, MouseEvent, FC } from 'react';
 import ReactFlow, {
   ReactFlowProvider,
   addEdge,
@@ -15,13 +15,9 @@ import ReactFlow, {
 import './updatenode.css';
 import Sidebar from './Sidebar';
 import './dnd.css';
+import './validation.css';
 
-
-const initialElements: Elements = [
-  { id: '1', type: 'input', data: { label: 'Node 1' }, position: { x: 100, y: 100 } },
-  { id: '2', data: { label: 'Node 2' }, position: { x: 100, y: 200 } },
-  { id: 'e1-2', source: '1', target: '2' },
-];
+const initialElements: Elements = [];
 
 const onDragOver = (event: DragEvent) => {
   event.preventDefault();
@@ -29,12 +25,13 @@ const onDragOver = (event: DragEvent) => {
 };
 
 let id = 0;
-const getId = (): ElementId => `dndnode_${id++}`;
+const getId = (): ElementId => `new_${id++}`;
 
 const TestSevenet = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState<OnLoadParams>();
   const [elements, setElements] = useState<Elements>(initialElements);
   const [nodeName, setNodeName] = useState<string>('');
+  const [nodeValue, setNodeValue] = useState<string>('');
   const [nodeId, setNodeId] = useState<string>('');
 
   
@@ -45,22 +42,21 @@ const TestSevenet = () => {
       els.map((el) => {
         console.log(nodeId)
         if (el.id === nodeId) {
-          // it's important that you create a new object here in order to notify react flow about the change
           el.data = {
             ...el.data,
             label: nodeName,
+            value: nodeValue,
           };
         }
 
         return el;
       })
     );
-  }, [nodeName, setElements]);
+  }, [nodeName, nodeValue, setElements]);
 
 
 
-  const onElementClick = (_: MouseEvent, element: FlowElement) => {setNodeId(element.id); setNodeName(element.data.label) };
-
+  const onElementClick = (_: MouseEvent, element: FlowElement) => {setNodeId(element.id); setNodeName(element.data.label); setNodeValue(element.data.value); };
   const onConnect = (params: Connection | Edge) => setElements((els) => addEdge(params, els));
   const onElementsRemove = (elementsToRemove: Elements) => setElements((els) => removeElements(elementsToRemove, els));
   const onLoad = (_reactFlowInstance: OnLoadParams) => setReactFlowInstance(_reactFlowInstance);
@@ -75,7 +71,7 @@ const TestSevenet = () => {
         id: getId(),
         type,
         position,
-        data: { label: `${type} node` },
+        data: { label: `${type} node`, value: '100' },
       };
 
       setElements((es) => es.concat(newNode));
@@ -93,11 +89,17 @@ const TestSevenet = () => {
               onLoad={onLoad}
               onDrop={onDrop}
               onDragOver={onDragOver}
+              className="validationflow"
             >
+            {console.log("Elementy ", elements)}
           <div className="updatenode__controls">
-            <label>label:</label>
+            <label>Change label:</label>
             <input value={nodeName} onChange ={(evt) => setNodeName(evt.target.value)} />
           </div>   
+          <div className="updatenode__controls2">
+            <label>Change value:</label>
+            <input value={nodeValue} onChange ={(evt) => setNodeValue(evt.target.value)} />
+          </div> 
           <Controls />   
         </ReactFlow>
         <Sidebar />
