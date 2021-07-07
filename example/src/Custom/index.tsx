@@ -17,21 +17,7 @@ import Sidebar from './Sidebar';
 import './dnd.css';
 import './validation.css';
 
-const initialElements: Elements = [
-  { id: '1', type: 'customInput', data: { label: 'Imię', value: '90' }, position: { x: 550, y: 5 }, className: 'light' },
-  { id: '2', type: 'custom', data: { label: 'Nazwisko', value: '70'  }, position: { x: 400, y: 100 }, className: 'light' },
-  { id: '3', type: 'output', data: { label: 'Koniec' }, position: { x: 700, y: 100 }, className: 'light' },
-  { id: '4', type: 'custom', data: { label: 'Numer karty', value: '50'  }, position: { x: 305, y: 200 }, className: 'light' },
-  { id: '5', type: 'output', data: { label: 'Koniec' }, position: { x: 505, y: 200 }, className: 'light' },
-  { id: '6', type: 'output', data: { label: 'Zgodność' }, position: { x: 200, y: 300 }, className: 'light' },
-  { id: '7', type: 'output', data: { label: 'Możliwość' }, position: { x: 405, y: 300 }, className: 'light' },
-  { id: 'e1-2', source: '1', target: '2', sourceHandle: '1_a', data: { label: 'ok', value: true } },
-  { id: 'e1-3', source: '1', target: '3', sourceHandle: '1_b', data: { label: 'not ok', value: false } },
-  { id: 'e2-4_a', source: '2', target: '4', sourceHandle: '2_a' },
-  { id: 'e2-4_b', source: '2', target: '5', sourceHandle: '2_b' },
-  { id: 'e4-6_a', source: '4', target: '6', sourceHandle: '4_a' },
-  { id: 'e4-6_b', source: '4', target: '7', sourceHandle: '4_b' },
-];
+const initialElements: Elements = [];
 
 const onDragOver = (event: DragEvent) => {
   event.preventDefault();
@@ -39,9 +25,9 @@ const onDragOver = (event: DragEvent) => {
 };
 
 let id = 0;
-const getId = (): ElementId => `n_${id++}`;
+const getId = (): ElementId => `new_${id++}`;
 
-const TestSevenet = () => {
+const Custom = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState<OnLoadParams>();
   const [elements, setElements] = useState<Elements>(initialElements);
   const [nodeName, setNodeName] = useState<string>('');
@@ -121,4 +107,4 @@ const TestSevenet = () => {
     </div>
   );
 }
-export default TestSevenet;
+export default Custom;

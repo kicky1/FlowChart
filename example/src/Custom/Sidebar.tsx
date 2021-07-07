@@ -46,13 +46,10 @@ const onDragStart2 = (event: DragEvent, nodeTypes: string) => {
 const Sidebar = () => {
   return (
     <aside>
-      <div className="description">Wyszukaj interesujący cie komponent.</div>
+      <div className="description">Wyszukaj interesujący ciebię komponent.</div>
       <input></input>
       <div className="react-flow__node-input" onDragStart={(event: DragEvent) => onDragStart(event, 'input')} draggable>
         Input Node
-      </div>
-      <div className="react-flow__node-customInput" onDragStart={(event: DragEvent) => onDragStart(event, 'customInput')} draggable>
-        Custom Input Node
       </div>
       <div className="react-flow__node-default" onDragStart={(event: DragEvent) => onDragStart(event, 'default')} draggable>
         Default Node

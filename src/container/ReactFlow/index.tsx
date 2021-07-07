@@ -14,6 +14,7 @@ import DefaultNode from '../../components/Nodes/DefaultNode';
 import InputNode from '../../components/Nodes/InputNode';
 import OutputNode from '../../components/Nodes/OutputNode';
 import CustomNode from '../../components/Nodes/CustomNode';
+import CustomInput from '../../components/Nodes/CustomInput';
 import { createNodeTypes } from '../NodeRenderer/utils';
 import SelectionListener from '../../components/SelectionListener';
 import { BezierEdge, StepEdge, SmoothStepEdge, StraightEdge } from '../../components/Edges';
@@ -48,7 +49,8 @@ const defaultNodeTypes = {
   input: InputNode,
   default: DefaultNode,
   output: OutputNode,
-  custom: CustomNode
+  custom: CustomNode,
+  customInput: CustomInput
 };
 
 const defaultEdgeTypes = {
