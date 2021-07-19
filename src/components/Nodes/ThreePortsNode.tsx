@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import Handle from '../../components/Handle';
 import { NodeProps, Position } from '../../types';
 
-const CustomNode = ({
+const ThreePortsNode = ({
   data,
   isConnectable,
   id 
@@ -17,17 +17,23 @@ const CustomNode = ({
         type="source"
         position={Position.Bottom}
         id={id + '_a'}
-        style={{ left: '30%'}}
+        style={{ left: '25%'}}
       />
       <Handle
         type="source"
         position={Position.Bottom}
         id={id + "_b"}
-        style={{ left: '70%'}}
+        style={{ left: '50%'}}
+      />
+            <Handle
+        type="source"
+        position={Position.Bottom}
+        id={id + "_c"}
+        style={{ left: '75%'}}
       />
   </>
 );
 
-CustomNode.displayName = 'CustomNode';
+ThreePortsNode.displayName = 'ThreePortsNode';
 
-export default memo(CustomNode);
+export default memo(ThreePortsNode);

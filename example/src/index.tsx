@@ -23,7 +23,7 @@ const Header = withRouter(({ history, location }) => {
 
   return (
     <header>
-        Flow Chart
+        Configuration Maker 
       <select defaultValue={location.pathname} onChange={onChange}>
         {routes.map((route) => (
           <option value={route.path} key={route.path}>

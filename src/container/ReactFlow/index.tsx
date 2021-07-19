@@ -15,6 +15,7 @@ import InputNode from '../../components/Nodes/InputNode';
 import OutputNode from '../../components/Nodes/OutputNode';
 import CustomNode from '../../components/Nodes/CustomNode';
 import CustomInput from '../../components/Nodes/CustomInput';
+import ThreePortsNode from '../../components/Nodes/ThreePortsNode';
 import { createNodeTypes } from '../NodeRenderer/utils';
 import SelectionListener from '../../components/SelectionListener';
 import { BezierEdge, StepEdge, SmoothStepEdge, StraightEdge } from '../../components/Edges';
@@ -45,12 +46,14 @@ import {
 import '../../style.css';
 import '../../theme-default.css';
 
+
 const defaultNodeTypes = {
   input: InputNode,
   default: DefaultNode,
   output: OutputNode,
   custom: CustomNode,
-  customInput: CustomInput
+  threePorts: ThreePortsNode,
+  customInputNode: CustomInput
 };
 
 const defaultEdgeTypes = {
@@ -170,7 +173,7 @@ const ReactFlow = forwardRef<ReactFlowRefType, ReactFlowProps>(
       connectionLineType = ConnectionLineType.Bezier,
       connectionLineStyle,
       connectionLineComponent,
-      deleteKeyCode = 'Backspace',
+      deleteKeyCode = 'Delete',
       selectionKeyCode = 'Shift',
       multiSelectionKeyCode = 'Meta',
       zoomActivationKeyCode = 'Meta',

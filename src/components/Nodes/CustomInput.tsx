@@ -8,7 +8,9 @@ const CustomInput = ({
   id 
 }: NodeProps) => (
   <>
-    {data.label} 
+    Input 
+    <br/>
+    {'<'} {data.value} 
     <Handle
         type="source"
         position={Position.Bottom}

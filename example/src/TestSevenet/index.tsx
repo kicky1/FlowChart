@@ -16,22 +16,59 @@ import './updatenode.css';
 import Sidebar from './Sidebar';
 import './dnd.css';
 import './validation.css';
+import { createStyles, makeStyles, withStyles, Theme } from '@material-ui/core/styles';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import InputBase from '@material-ui/core/InputBase';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
-const initialElements: Elements = [
-  { id: '1', type: 'customInput', data: { label: 'Imię', value: '90' }, position: { x: 550, y: 5 }, className: 'light' },
-  { id: '2', type: 'custom', data: { label: 'Nazwisko', value: '70'  }, position: { x: 400, y: 100 }, className: 'light' },
-  { id: '3', type: 'output', data: { label: 'Koniec' }, position: { x: 700, y: 100 }, className: 'light' },
-  { id: '4', type: 'custom', data: { label: 'Numer karty', value: '50'  }, position: { x: 305, y: 200 }, className: 'light' },
-  { id: '5', type: 'output', data: { label: 'Koniec' }, position: { x: 505, y: 200 }, className: 'light' },
-  { id: '6', type: 'output', data: { label: 'Zgodność' }, position: { x: 200, y: 300 }, className: 'light' },
-  { id: '7', type: 'output', data: { label: 'Możliwość' }, position: { x: 405, y: 300 }, className: 'light' },
-  { id: 'e1-2', source: '1', target: '2', sourceHandle: '1_a', data: { label: 'ok', value: true } },
-  { id: 'e1-3', source: '1', target: '3', sourceHandle: '1_b', data: { label: 'not ok', value: false } },
-  { id: 'e2-4_a', source: '2', target: '4', sourceHandle: '2_a' },
-  { id: 'e2-4_b', source: '2', target: '5', sourceHandle: '2_b' },
-  { id: 'e4-6_a', source: '4', target: '6', sourceHandle: '4_a' },
-  { id: 'e4-6_b', source: '4', target: '7', sourceHandle: '4_b' },
-];
+
+
+const BootstrapInput = withStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      'label + &': {
+        marginTop: theme.spacing(3),
+      },
+    },
+    input: {
+      borderRadius: 4,
+      position: 'relative',
+      backgroundColor: theme.palette.background.paper,
+      border: '1px solid #ced4da',
+      fontSize: 16,
+      padding: '10px 26px 10px 12px',
+      transition: theme.transitions.create(['border-color', 'box-shadow']),
+      fontFamily: [
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(','),
+      '&:focus': {
+        borderRadius: 4,
+        borderColor: '#80bdff',
+        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+      },
+    },
+  }),
+)(InputBase);
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    margin: {
+      margin: theme.spacing(1),
+    },
+  }),
+);
+
+const initialElements: Elements = [];
 
 const onDragOver = (event: DragEvent) => {
   event.preventDefault();
@@ -39,7 +76,7 @@ const onDragOver = (event: DragEvent) => {
 };
 
 let id = 0;
-const getId = (): ElementId => `n_${id++}`;
+const getId = (): ElementId => `new_${id++}`;
 
 const TestSevenet = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState<OnLoadParams>();
@@ -48,7 +85,7 @@ const TestSevenet = () => {
   const [nodeValue, setNodeValue] = useState<string>('');
   const [nodeId, setNodeId] = useState<string>('');
 
-  
+  const classes = useStyles();
   
   useEffect(() => {
     setElements((els) =>
@@ -107,12 +144,27 @@ const TestSevenet = () => {
             >
             {console.log("Elementy ", elements)}
           <div className="updatenode__controls">
-            <label>Change label:</label>
-            <input value={nodeName} onChange ={(evt) => setNodeName(evt.target.value)} />
-          </div>   
-          <div className="updatenode__controls2">
-            <label>Change value:</label>
-            <input value={nodeValue} onChange ={(evt) => setNodeValue(evt.target.value)} />
+          <FormControl className={classes.margin}>
+              <InputLabel htmlFor="demo-customized-textbox">Change value</InputLabel>
+              <BootstrapInput 
+                id="demo-customized-textbox" 
+                value={nodeValue} 
+                onChange ={(evt) => setNodeValue(evt.target.value)}/>
+            </FormControl>
+            <FormControl className={classes.margin}>
+              <InputLabel htmlFor="demo-customized-select-native">Node</InputLabel> 
+                <NativeSelect
+                id="demo-customized-select-native"
+                value={nodeName}
+                onChange ={(evt) => setNodeName(evt.target.value)}
+                input={<BootstrapInput />}
+              >
+                <option aria-label="None" value="" />
+                <option value={'Imię'}>Imię</option>
+                <option value={'Nazwisko'}>Nazwisko</option>
+                <option value={'Nr karty'}>Nr karty</option>
+              </NativeSelect>
+            </FormControl>
           </div> 
           <Controls />   
         </ReactFlow>

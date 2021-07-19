@@ -47,7 +47,8 @@
 .react-flow__node-default,
 .react-flow__node-input,
 .react-flow__node-custom,
-.react-flow__node-customInput,
+.react-flow__node-threePorts,
+.react-flow__node-customInputNode,
 .react-flow__node-output {
   padding: 10px;
   border-radius: 3px;
@@ -62,7 +63,8 @@
 .react-flow__node-default.selectable,
 .react-flow__node-input.selectable
 .react-flow__node-custom.selectable,
-.react-flow__node-customInput.selectable,
+.react-flow__node-threePorts.selectable,
+.react-flow__node-customInpuNode.selectable,
 .react-flow__node-output.selectable {
   &:hover {
     box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.08);
@@ -83,7 +85,7 @@
   }
 }
 
-.react-flow__node-customInput {
+.react-flow__node-customInputNode {
   background: #fff;
   border-color: #0041d0;
 
@@ -108,6 +110,20 @@
 
   .react-flow__handle {
     background: #1a192b;
+  }
+}
+
+.react-flow__node-threePorts {
+  background: #fff;
+  border-color: #dd9254;
+
+  &.selected,
+  &.selected:hover {
+    box-shadow: 0 0 0 0.5px #dd9254;
+  }
+
+  .react-flow__handle {
+    background: #dd9254;
   }
 }
 
