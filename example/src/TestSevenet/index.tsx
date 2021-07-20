@@ -125,6 +125,8 @@ const TestSevenet = () => {
         data: { label: `${type} node`, value: '100' },
       };
 
+      
+
       setElements((es) => es.concat(newNode));
     }
   };

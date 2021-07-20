@@ -6,6 +6,7 @@ import TestSevenet from './TestSevenet';
 import Custom from './Custom';
 
 import './index.css';
+import LoginPage from './Pages/LoginPage/LoginPage';
 
 const routes = [
   {
@@ -15,6 +16,10 @@ const routes = [
   {
     path: '/custom',
     component: Custom,
+  },
+  {
+    path: '/login',
+    component: LoginPage,
   },
 ];
 
